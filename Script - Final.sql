@@ -1,0 +1,35 @@
+
+CREATE SCHEMA IF NOT EXISTS BD_EAD DEFAULT CHARACTER SET utf8 ;
+USE BD_EAD ;
+
+CREATE TABLE Situacao (
+  Id_Situacao INT NOT NULL,
+  Situacao VARCHAR(10),
+  PRIMARY KEY (Id_Situacao));
+
+CREATE TABLE Socio (
+  Id_Socio INT NOT NULL,
+  Nome VARCHAR(256),
+  CPF VARCHAR(11),
+  Email VARCHAR(256),
+  Id_Situacao INT NOT NULL,
+  PRIMARY KEY (Id_Socio),
+  FOREIGN KEY(Id_Situacao) REFERENCES Situacao(Id_Situacao));
+
+CREATE TABLE IF NOT EXISTS Marca (
+  Id_Marca INT NOT NULL,
+  Marca VARCHAR(128),
+  PRIMARY KEY (Id_Marca));
+
+CREATE TABLE IF NOT EXISTS Carro (
+  Id_Carro INT NOT NULL,
+  Modelo VARCHAR(128),
+  Cor VARCHAR(64),
+  Placa VARCHAR(10),
+  Id_Socio INT NOT NULL,
+  Id_Marca INT NOT NULL,
+  PRIMARY KEY (Id_Carro),
+  FOREIGN KEY(Id_Socio) REFERENCES Socio(Id_Socio),
+  FOREIGN KEY(Id_Marca) REFERENCES Marca(Id_Marca));
+
+
